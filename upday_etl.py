@@ -4,6 +4,7 @@ import json
 import pandas as pd 
 import numpy as np
 
+######### Import and clean TSV files #########
 #import TSV files from S3 location
 f1 = 'https://upday-data-assignment.s3.eu-west-1.amazonaws.com/lake/2019-02-15.tsv'
 f2 = 'https://upday-data-assignment.s3.eu-west-1.amazonaws.com/lake/2019-02-16.tsv'
@@ -28,6 +29,8 @@ T_1['ATTRIBUTES'] = T_1['ATTRIBUTES'].apply(json.loads)
 df_ATTRIBUTES = pd.json_normalize(T_1['ATTRIBUTES'])
 complete_df = pd.concat([T_1, df_ATTRIBUTES], axis=1).drop('ATTRIBUTES', axis=1)
 
+######### ======================================================= #########
+
 
 #prepare data for table article_performance 
 stage = complete_df[['id', 'ID', 'TIMESTAMP', 'EVENT_NAME','title', 'category']][(complete_df.EVENT_NAME.str.contains("card")) | (complete_df.EVENT_NAME.str.contains("article"))].sort_values(by=['id']).reset_index(drop=True)
@@ -47,7 +50,7 @@ art_perf['card_views']=art_perf.my_news_card_viewed+art_perf.top_news_card_viewe
 #create dataframe formatted for article_performance table
 article_performance = art_perf.drop(['my_news_card_viewed', 'top_news_card_viewed'], axis=1).rename(columns={"article_viewed": "article_views", "id":"article_id"})
 
-# reoder columns as per requirement
+# reorder columns as per requirement **********FINAL dataframe FOR article_performance
 article_performance = article_performance[['article_id', 'date', 'title', 'category', 'card_views', 'article_views']]
 
 ######### ======================================================= #########
@@ -64,5 +67,5 @@ usr_perf = article_performance[['article_id', 'date', 'card_views', 'article_vie
 # combine numbers for card view events
 usr_perf['ctr']=usr_perf.article_views / usr_perf.card_views
 
-#create dataframe formatted for user_performance table
+#create dataframe formatted for user_performance table **********FINAL dataframe FOR user_performance
 user_performance  = usr_perf.drop(['article_views', 'card_views'], axis=1).rename(columns={"article_id": "user_id"}).reset_index(drop=True)

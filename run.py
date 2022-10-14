@@ -1,4 +1,4 @@
-import pandas as pd
+#import pandas as pd
 import psycopg2
 import sqlalchemy
 from upday_etl import article_performance, user_performance
