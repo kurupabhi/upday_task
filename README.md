@@ -16,4 +16,4 @@ I have not modified the connection parameters for the Postgres database. And I h
 * I have not setup any tests due to lack of knowledge and experience with this, but the test that I would use on the provided datasets is to check for nulls in the TIMESTAMP and id columns. This can be setup using pytest, however I have never done this before and I only know this after my explorations related to the task.
 
 ****
-I have also included a jupyter notebook with my exploration code.
+I have also included a jupyter notebook with my exploration code. (upday_etl_notebook.ipynb)
