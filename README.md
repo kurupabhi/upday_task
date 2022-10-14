@@ -12,6 +12,7 @@ I have not modified the connection parameters for the Postgres database. And I h
 
 #### Further notes
 * I have included pandas and sqlalchemy in the requirements.txt file
+* upday_etl.py is the file with the "E-T" part of the process and the run.py has the "L" part of the complete ETL process
 * I have not setup any tests due to lack of knowledge and experience with this, but the test that I would use on the provided datasets is to check for nulls in the TIMESTAMP and id columns. This can be setup using pytest, however I have never done this before and I only know this after my explorations related to the task.
 
 ****
